@@ -1,0 +1,15 @@
+.category-container {
+  background-color: white;
+  border: 5px solid white;
+  border-radius: 16px;
+  transition: 0.5s;
+}
+
+.category-container:hover {
+  cursor: pointer;
+  border: 5px solid #BE0D2C;
+}
+
+h4 {
+  font-weight: 700;
+}

@@ -1,0 +1,17 @@
+h4, h3 {
+  font-weight: 700;
+}
+
+.product-actions {
+  border: 1px solid black;
+  border-radius: 8px;
+}
+
+.product-actions > p {
+  font-weight: 700;
+  font-size: 18px;
+}
+
+button {
+  width: 100%;
+}

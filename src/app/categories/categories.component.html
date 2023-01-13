@@ -1,0 +1,18 @@
+<div class="py-5" style="background-color: #4D7BB4">
+  <div class="container-xl">
+    <h3 class="text-white py-4">Categories</h3>
+    <div *ngIf="!isLoading" class="category-list row">
+      <app-category-item
+        class="col-4 mb-4"
+        *ngFor="let category of categories"
+        [routerLink]="['/category', category.id]"
+        [category]="category">
+      </app-category-item>
+    </div>
+    <div *ngIf="isLoading" class="d-flex justify-content-center">
+      <div class="spinner-border" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+  </div>
+</div>

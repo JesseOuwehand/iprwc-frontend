@@ -1,0 +1,20 @@
+.full-width {
+  width: 100%;
+}
+
+.product-add-container {
+  border: 1px solid black;
+  border-radius: 16px;
+}
+
+button {
+  font-weight: 700;
+}
+
+input.ng-invalid.ng-touched {
+  border: 2px solid red;
+}
+
+textarea.ng-invalid.ng-touched {
+  border: 2px solid red;
+}

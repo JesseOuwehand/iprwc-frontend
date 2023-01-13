@@ -1,0 +1,17 @@
+<div class="py-5">
+  <div class="container-xl">
+    <div *ngIf="!isLoading">
+      <h3>{{ category.name }}</h3>
+      <p>{{ category.description }}</p>
+      <hr/>
+      <div class="product-list row">
+        <app-product-item *ngFor="let product of category.products" [product]="product" class="col-3 mb-4"></app-product-item>
+      </div>
+    </div>
+    <div *ngIf="isLoading" class="d-flex justify-content-center">
+      <div class="spinner-border" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+  </div>
+</div>

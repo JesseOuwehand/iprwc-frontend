@@ -1,0 +1,10 @@
+<div class="container-fluid px-0">
+  <div class="product-container d-flex flex-column justify-content-center" (click)="navigateToProduct()">
+    <img
+      class="p-2"
+      [src]="product.imageUrl"
+      alt="product-image">
+    <h4 class="p-2">{{ product.name }}</h4>
+    <h3 class="p-2">€ {{ product.price }}</h3>
+  </div>
+</div>

@@ -1,0 +1,37 @@
+<div class="admin-container full-vh bg-light">
+  <div class="container-xl">
+    <div class="admin-controls p-5">
+      <ul class="list-group">
+        <div class="d-flex flex-row justify-content-between">
+          <h4 class="p-2">Categories</h4>
+          <button type="button" class="btn btn-success m-2" [routerLink]="['/category/add']">Add category</button>
+        </div>
+        <div
+          class="list-group list-group-horizontal d-flex justify-content-between align-items-center list-item p-2 mb-1"
+          *ngFor="let category of categories">
+          <h5 class="m-0 ps-2">{{ category.name }}</h5>
+          <div>
+            <button type="button" class="btn btn-warning me-2" (click)="editCategory(category)">Edit</button>
+            <button type="button" class="btn btn-danger" (click)="deleteCategory(category)">Delete</button>
+          </div>
+        </div>
+      </ul>
+      <hr class="my-4">
+      <ul class="list-group">
+        <div class="d-flex flex-row justify-content-between">
+          <h4 class="p-2">Products</h4>
+          <button type="button" class="btn btn-success m-2" [routerLink]="['/product/add']">Add product</button>
+        </div>
+        <div
+          class="list-group list-group-horizontal d-flex justify-content-between align-items-center list-item p-2 mb-1"
+          *ngFor="let product of products">
+          <h5 class="m-0 ps-2">{{ product.name }}</h5>
+          <div>
+            <button type="button" class="btn btn-warning me-2" (click)="editProduct(product)">Edit</button>
+            <button type="button" class="btn btn-danger" (click)="deleteProduct(product)">Delete</button>
+          </div>
+        </div>
+      </ul>
+    </div>
+  </div>
+</div>

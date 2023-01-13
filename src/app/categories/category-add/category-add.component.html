@@ -1,0 +1,45 @@
+<div class="py-5">
+  <div class="container-xl d-flex justify-content-center">
+    <div *ngIf="!isLoading" class="col-6 mt-5 p-5 category-add-container">
+      <form class="full-width" [formGroup]="addCategoryForm" (ngSubmit)="onSubmit()">
+        <h4>New Category</h4>
+        <div class="mb-3 mt-5">
+          <label for="categoryName" class="form-label">Category name</label>
+          <input type="text" class="form-control" id="categoryName" formControlName="categoryName">
+          <span
+            *ngIf="!addCategoryForm.get('categoryName').valid && addCategoryForm.get('categoryName').touched"
+            class="text-danger ms-1">
+            <small>Category name is required!</small>
+          </span>
+        </div>
+        <div class="mb-3">
+          <label for="categoryDescription" class="form-label">Description</label>
+          <textarea class="form-control" id="categoryDescription" rows="3" formControlName="categoryDescription"></textarea>
+          <span
+            *ngIf="!addCategoryForm.get('categoryDescription').valid && addCategoryForm.get('categoryDescription').touched"
+            class="text-danger ms-1">
+            <small>Category description is required!</small>
+          </span>
+        </div>
+        <div class="mb-3">
+          <label for="categoryImage" class="form-label">Category image</label>
+          <input type="text" class="form-control" id="categoryImage" formControlName="categoryImage">
+          <span
+            *ngIf="!addCategoryForm.get('categoryImage').valid && addCategoryForm.get('categoryImage').touched"
+            class="text-danger ms-1">
+            <small>Category image is required!</small>
+          </span>
+        </div>
+        <button type="submit" class="btn btn-primary px-3" [disabled]="addCategoryForm.invalid || isLoadingButton">
+          <span *ngIf="isLoadingButton" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+          {{ isLoadingButton ? 'Loading...' : 'Submit' }}
+        </button>
+      </form>
+    </div>
+  </div>
+  <div *ngIf="isLoading" class="d-flex justify-content-center">
+    <div class="spinner-border" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,8 @@
+i:hover {
+  cursor: pointer;
+  color: darkred;
+}
+
+.cart-item-container {
+  border-bottom: solid 1px black;
+}

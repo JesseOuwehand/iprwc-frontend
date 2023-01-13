@@ -1,0 +1,61 @@
+<div class="bg-light full-vh">
+  <div class="container-xl d-flex justify-content-center">
+    <div class="col-6 mt-5 p-5 login-container">
+      <form class="full-width" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        <h4>Register</h4>
+        <a routerLink="/login">Already have an account? Login here!</a>
+        <div class="mb-3 mt-5 row gx-3">
+          <div class="col-6">
+            <label for="firstName" class="form-label">First Name</label>
+            <input type="text" class="form-control" id="firstName" formControlName="firstName">
+            <span
+              *ngIf="!registerForm.get('firstName').valid && registerForm.get('firstName').touched"
+              class="text-danger ms-1">
+              <small>First name is required!</small>
+            </span>
+          </div>
+          <div class="col-6">
+            <label for="lastName" class="form-label">Last Name</label>
+            <input type="text" class="form-control" id="lastName" formControlName="lastName">
+          </div>
+          <span
+            *ngIf="!registerForm.get('lastName').valid && registerForm.get('lastName').touched"
+            class="text-danger ms-1">
+              <small>Last name is required!</small>
+            </span>
+        </div>
+        <div class="mb-3">
+          <label for="email" class="form-label">Email address</label>
+          <input type="email" class="form-control" id="email" formControlName="email">
+          <span
+            *ngIf="!registerForm.get('email').valid && registerForm.get('email').touched"
+            class="text-danger ms-1">
+              <small>Email is required!</small>
+            </span>
+        </div>
+        <div class="mb-3">
+          <label for="password" class="form-label">Password</label>
+          <input type="password" class="form-control" id="password" formControlName="password">
+          <span
+            *ngIf="!registerForm.get('password').valid && registerForm.get('password').touched"
+            class="text-danger ms-1">
+            <small>Password is required!</small>
+          </span>
+        </div>
+        <div class="mb-3">
+          <label for="password2" class="form-label">Confirm Password</label>
+          <input type="password" class="form-control" id="password2" formControlName="password2">
+          <span
+            *ngIf="!registerForm.get('password2').valid && registerForm.get('password2').touched"
+            class="text-danger ms-1">
+            <small>Password is required!</small>
+          </span>
+        </div>
+        <button type="submit" class="btn btn-primary px-3" [disabled]="registerForm.invalid || isLoading">
+          <span *ngIf="isLoading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+          {{ isLoading ? 'Loading...' : 'Register' }}
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

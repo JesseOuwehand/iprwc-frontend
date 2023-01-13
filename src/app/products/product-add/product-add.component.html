@@ -1,0 +1,74 @@
+<div class="py-5">
+  <div class="container-xl d-flex justify-content-center">
+    <div *ngIf="!isLoading" class="col-6 mt-5 p-5 product-add-container">
+      <form class="full-width" [formGroup]="addProductForm" (ngSubmit)="onSubmit()">
+        <h4>New Product</h4>
+        <div class="mb-3 mt-5">
+          <label for="productName" class="form-label">Product name</label>
+          <input type="text" class="form-control" id="productName" placeholder="Memphis Grizzlies - Ja Morant" formControlName="productName">
+          <span
+            *ngIf="!addProductForm.get('productName').valid && addProductForm.get('productName').touched"
+            class="text-danger ms-1">
+            <small>Product name is required!</small>
+          </span>
+        </div>
+        <div class="mb-3">
+          <label for="productDescription" class="form-label">Description</label>
+          <textarea class="form-control" id="productDescription" rows="3" formControlName="productDescription"></textarea>
+          <span
+            *ngIf="!addProductForm.get('productDescription').valid && addProductForm.get('productDescription').touched"
+            class="text-danger ms-1">
+            <small>Description is required!</small>
+          </span>
+        </div>
+        <div class="mb-3">
+          <label for="productImage" class="form-label">Product image</label>
+          <input type="text" class="form-control" id="productImage" formControlName="productImage">
+          <span
+            *ngIf="!addProductForm.get('productImage').valid && addProductForm.get('productImage').touched"
+            class="text-danger ms-1">
+            <small>Product image is required!</small>
+          </span>
+        </div>
+        <div class="mb-3 row gx-3">
+          <div class="col-6">
+            <label for="price" class="form-label">Price</label>
+            <div class="input-group">
+              <span class="input-group-text" id="currency">€</span>
+              <input type="text" class="form-control" id="price" aria-describedby="currency" formControlName="price">
+              <span
+                *ngIf="!addProductForm.get('price').valid && addProductForm.get('price').touched"
+                class="text-danger ms-1">
+            <small>Price is required!</small>
+          </span>
+            </div>
+          </div>
+          <div class="col-6">
+            <label for="inventory" class="form-label">Inventory</label>
+            <input type="text" class="form-control" id="inventory" formControlName="inventory">
+            <span
+              *ngIf="!addProductForm.get('inventory').valid && addProductForm.get('inventory').touched"
+              class="text-danger ms-1">
+            <small>Inventory is required!</small>
+          </span>
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="category" class="form-label">Category</label>
+          <select class="form-select" id="category" formControlName="category">
+            <option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-primary px-3" [disabled]="addProductForm.invalid || isLoadingButton">
+          <span *ngIf="isLoadingButton" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+          {{ isLoadingButton ? 'Loading...' : 'Submit' }}
+        </button>
+      </form>
+    </div>
+  </div>
+  <div *ngIf="isLoading" class="d-flex justify-content-center">
+    <div class="spinner-border" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+</div>

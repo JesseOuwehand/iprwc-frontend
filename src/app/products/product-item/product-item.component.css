@@ -1,0 +1,17 @@
+.product-container {
+  background-color: white;
+  border: 2px solid white;
+  transition: 0.5s;
+  height: 450px;
+  max-height: 450px;
+}
+
+.product-container:hover {
+  cursor: pointer;
+  border: 2px solid black;
+}
+
+h4 {
+  font-weight: 500;
+  font-size: 18px;
+}
