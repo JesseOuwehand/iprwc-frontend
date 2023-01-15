@@ -11,7 +11,7 @@ export class CategoryService {
   fetchAllCategories() {
     return this.http
       .get<Category[]>(
-        'http://localhost:8080/api/v1/category'
+        'http://bayoucountry.nl:8080/api/v1/category'
       )
       .pipe(
         map(categories => {
@@ -28,14 +28,14 @@ export class CategoryService {
   fetchCategoryById(id: number) {
     return this.http
       .get<Category>(
-        'http://localhost:8080/api/v1/category/' + id
+        'http://bayoucountry.nl:8080/api/v1/category/' + id
       );
   }
 
   addCategory(newCategory: Category) {
     return this.http
       .post(
-        'http://localhost:8080/api/v1/category/add',
+        'http://bayoucountry.nl:8080/api/v1/category/add',
         newCategory
       );
   }
@@ -43,7 +43,7 @@ export class CategoryService {
   updateCategory(category: Category) {
     return this.http
       .post(
-        'http://localhost:8080/api/v1/category/update',
+        'http://bayoucountry.nl:8080/api/v1/category/update',
         category
       );
   }
@@ -51,7 +51,7 @@ export class CategoryService {
   deleteCategory(categoryId: number) {
     return this.http
       .delete(
-        'http://localhost:8080/api/v1/category/' + categoryId
+        'http://bayoucountry.nl:8080/api/v1/category/' + categoryId
       );
   }
 }

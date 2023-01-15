@@ -18,18 +18,18 @@ export class ShoppingCartService {
 
   addItemToCart(cartItemDto: CartItemDto) {
     return this.http
-      .post('http://localhost:8080/api/v1/cart/add', cartItemDto);
+      .post('http://bayoucountry.nl:8080/api/v1/cart/add', cartItemDto);
   }
 
   fetchShoppingCart() {
     return this.http
-      .get<ShoppingCart>('http://localhost:8080/api/v1/cart');
+      .get<ShoppingCart>('http://bayoucountry.nl:8080/api/v1/cart');
   }
 
   deleteFromCart(cartItem: CartItem) {
     return this.http
       .delete(
-        'http://localhost:8080/api/v1/cart/' + cartItem.id
+        'http://bayoucountry.nl:8080/api/v1/cart/' + cartItem.id
       );
   }
 }
