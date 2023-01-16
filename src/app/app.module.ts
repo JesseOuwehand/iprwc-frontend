@@ -21,6 +21,7 @@ import { ShoppingCartComponent } from './shared/shopping-cart/shopping-cart.comp
 import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 import { AuthGuardService } from "./services/auth-guard.service";
 import { CartItemComponent } from './shared/shopping-cart/cart-item/cart-item.component';
+import { ToastComponent } from './shared/toast/toast.component';
 
 const appRoutes: Routes = [
   {
@@ -61,8 +62,7 @@ const appRoutes: Routes = [
   },
   {
     path: 'product/:id',
-    component: ProductDetailComponent,
-    canActivate: [AuthGuardService]
+    component: ProductDetailComponent
   },
   {
     path: 'admin',
@@ -87,7 +87,8 @@ const appRoutes: Routes = [
     ProductAddComponent,
     ShoppingCartComponent,
     AdminPanelComponent,
-    CartItemComponent
+    CartItemComponent,
+    ToastComponent
   ],
   imports: [
     BrowserModule,

@@ -4,8 +4,10 @@ import { CategoryService } from "../../services/category.service";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { ProductService } from "../../services/product.service";
 import { ProductDto } from "../../dto/product.dto";
-import {ActivatedRoute, Params} from "@angular/router";
+import {ActivatedRoute, Params, Router} from "@angular/router";
 import {Product} from "../../models/product.model";
+import {Message} from "../../models/message.model";
+import {MessageService} from "../../services/message.service";
 
 @Component({
   selector: 'app-product-add',
@@ -23,6 +25,8 @@ export class ProductAddComponent implements OnInit {
   constructor(
     private categoryService: CategoryService,
     private productService: ProductService,
+    private messageService: MessageService,
+    private router: Router,
     private route: ActivatedRoute) {}
 
   ngOnInit() {
@@ -43,6 +47,13 @@ export class ProductAddComponent implements OnInit {
             });
             this.isLoading = false;
           }, () => {
+            const message = new Message(
+              'Error',
+              'Something went wrong!'
+            )
+            this.messageService.toggleToast(
+              message
+            );
             this.isLoading = false;
           })
       } else {
@@ -63,6 +74,14 @@ export class ProductAddComponent implements OnInit {
     this.categoryService.fetchAllCategories().subscribe(categories => {
       this.categories = categories;
       this.isLoadingButton = false;
+    }, () => {
+      const message = new Message(
+        'Error',
+        'Something went wrong!'
+      )
+      this.messageService.toggleToast(
+        message
+      );
     })
   }
 
@@ -79,16 +98,46 @@ export class ProductAddComponent implements OnInit {
     if (this.productToUpdate !== undefined) {
       newProduct.id = this.productToUpdate.id;
       this.productService.updateProduct(newProduct).subscribe(
-        response => {
+        () => {
+          const message = new Message(
+            'Success',
+            'Product updated!'
+          )
+          this.messageService.toggleToast(
+            message
+          );
           this.isLoadingButton = false;
-        }, error => {
+          this.router.navigate(['/admin'])
+        }, () => {
+          const message = new Message(
+            'Error',
+            'Something went wrong!'
+          )
+          this.messageService.toggleToast(
+            message
+          );
           this.isLoadingButton = false;
         }
       )
     } else {
       this.productService.addProduct(newProduct).subscribe(() => {
+        const message = new Message(
+          'Success',
+          'Product added!'
+        )
+        this.messageService.toggleToast(
+          message
+        );
         this.isLoadingButton = false;
+        this.router.navigate(['/admin'])
       }, () => {
+        const message = new Message(
+          'Error',
+          'Something went wrong!'
+        )
+        this.messageService.toggleToast(
+          message
+        );
         this.isLoadingButton = false;
       })
     }

@@ -1,0 +1,8 @@
+.toast-wrapper {
+  position: absolute;
+  top: 5%;
+  right: 5%;
+  border: 2px solid white;
+  border-radius: 8px;
+  min-width: 300px;
+}

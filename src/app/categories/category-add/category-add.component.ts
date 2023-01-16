@@ -3,7 +3,9 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 
 import { CategoryService } from "../../services/category.service";
 import {Category} from "../../models/category.model";
-import {ActivatedRoute, Params} from "@angular/router";
+import {ActivatedRoute, Params, Router} from "@angular/router";
+import {MessageService} from "../../services/message.service";
+import {Message} from "../../models/message.model";
 
 @Component({
   selector: 'app-category-add',
@@ -16,7 +18,11 @@ export class CategoryAddComponent implements OnInit {
   isLoadingButton: boolean = false;
   categoryToUpdate: Category;
 
-  constructor(private categoryService: CategoryService, private route: ActivatedRoute) {}
+  constructor(
+    private categoryService: CategoryService,
+    private route: ActivatedRoute,
+    private router: Router,
+    private messageService: MessageService) {}
 
   ngOnInit() {
     this.route.params.subscribe((params: Params) => {
@@ -32,6 +38,13 @@ export class CategoryAddComponent implements OnInit {
             });
             this.isLoading = false;
           }, () => {
+            const message = new Message(
+              'Error',
+              'Could not fetch category!'
+            )
+            this.messageService.toggleToast(
+              message
+            );
             this.isLoading = false;
           })
 
@@ -51,9 +64,24 @@ export class CategoryAddComponent implements OnInit {
       this.categoryToUpdate.name = this.addCategoryForm.get('categoryName').value
       this.categoryToUpdate.description = this.addCategoryForm.get('categoryDescription').value
       this.categoryToUpdate.imageUrl = this.addCategoryForm.get('categoryImage').value
-      this.categoryService.updateCategory(this.categoryToUpdate).subscribe(response => {
+      this.categoryService.updateCategory(this.categoryToUpdate).subscribe(() => {
+        const message = new Message(
+          'Success',
+          'Category updated!'
+        )
+        this.messageService.toggleToast(
+          message
+        );
+        this.router.navigate(['/admin'])
         this.isLoadingButton = false;
       }, () => {
+        const message = new Message(
+          'Error',
+          'Something went wrong!'
+        )
+        this.messageService.toggleToast(
+          message
+        );
         this.isLoadingButton = false;
       });
     } else {
@@ -63,9 +91,24 @@ export class CategoryAddComponent implements OnInit {
         this.addCategoryForm.get('categoryImage').value,
         []
       );
-      this.categoryService.addCategory(newCategory).subscribe(response => {
+      this.categoryService.addCategory(newCategory).subscribe(() => {
+        const message = new Message(
+          'Success',
+          'Category added!'
+        )
+        this.messageService.toggleToast(
+          message
+        );
+        this.router.navigate(['/admin'])
         this.isLoadingButton = false;
       }, () => {
+        const message = new Message(
+          'Error',
+          'Something went wrong!'
+        )
+        this.messageService.toggleToast(
+          message
+        );
         this.isLoadingButton = false;
       });
     }

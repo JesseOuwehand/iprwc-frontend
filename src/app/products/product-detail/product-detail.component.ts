@@ -4,6 +4,8 @@ import {ProductService} from "../../services/product.service";
 import {ActivatedRoute, Params} from "@angular/router";
 import {CartItemDto} from "../../dto/cart-item.dto";
 import {ShoppingCartService} from "../../services/shopping-cart.service";
+import {MessageService} from "../../services/message.service";
+import {Message} from "../../models/message.model";
 
 @Component({
   selector: 'app-product-detail',
@@ -21,7 +23,8 @@ export class ProductDetailComponent implements OnInit {
   constructor(
     private productService: ProductService,
     private route: ActivatedRoute,
-    private shoppingCartService: ShoppingCartService
+    private shoppingCartService: ShoppingCartService,
+    private messageService: MessageService
   ) {}
 
   ngOnInit() {
@@ -46,8 +49,22 @@ export class ProductDetailComponent implements OnInit {
     this.isLoadingButton = true;
     const cartItemDto = new CartItemDto(this.product.id, Number(this.quantity));
     this.shoppingCartService.addItemToCart(cartItemDto).subscribe(() => {
+      const message = new Message(
+        'Success',
+        'Item Added to cart!'
+      )
+      this.messageService.toggleToast(
+        message
+      );
       this.isLoadingButton = false;
     }, () => {
+      const message = new Message(
+        'Error',
+        'Something went wrong!'
+      )
+      this.messageService.toggleToast(
+        message
+      )
       this.isLoadingButton = false;
     })
   }

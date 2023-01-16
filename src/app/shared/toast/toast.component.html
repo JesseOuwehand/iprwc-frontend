@@ -1,0 +1,12 @@
+<div class="toast-wrapper d-flex flex-column p-3"
+  [ngClass]="{'text-bg-danger': toast.type === 'Error', 'text-bg-success': toast.type === 'Success'}"
+  role="alert">
+  <div class="d-flex flex-row align-items-center">
+    <h4 class="me-auto">{{ toast.type }}</h4>
+    <button type="button" class="btn-close text-bg-light" (click)="closeToast()"></button>
+  </div>
+  <hr class="my-2">
+  <div>
+    {{ toast.message }}
+  </div>
+</div>

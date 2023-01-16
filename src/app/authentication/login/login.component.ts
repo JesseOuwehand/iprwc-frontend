@@ -3,6 +3,8 @@ import {AuthenticationService} from "../../services/authentication.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {LoginCredentials} from "../../models/login-credentials.model";
 import {Router} from "@angular/router";
+import {Message} from "../../models/message.model";
+import {MessageService} from "../../services/message.service";
 
 @Component({
   selector: 'app-login',
@@ -13,7 +15,10 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   isLoading: boolean = false;
 
-  constructor(private authenticationService: AuthenticationService, private router: Router) {}
+  constructor(private authenticationService: AuthenticationService,
+              private router: Router,
+              private messageService: MessageService
+              ) {}
 
   ngOnInit() {
     this.loginForm = new FormGroup({
@@ -29,11 +34,25 @@ export class LoginComponent implements OnInit {
     );
 
     this.authenticationService.Login(credentials).subscribe(
-      response => {
+      () => {
+        const message = new Message(
+          'Success',
+          'Welcome back!'
+        )
+        this.messageService.toggleToast(
+          message
+        );
         this.isLoading = false;
         this.router.navigate(['/']);
       },
       () => {
+        const message = new Message(
+          'Error',
+          'Something went wrong!'
+        )
+        this.messageService.toggleToast(
+          message
+        );
         this.isLoading = false;
       });
   }

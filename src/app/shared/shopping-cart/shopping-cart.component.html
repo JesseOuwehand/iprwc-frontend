@@ -6,7 +6,7 @@
   <hr/>
   <div *ngIf="!isLoading" class="offcanvas-body">
     <div class="list-group">
-      <app-cart-item *ngFor="let cartItem of cartItems" [cartItem]="cartItem"></app-cart-item>
+      <app-cart-item *ngFor="let cartItem of cartItems" [cartItem]="cartItem" (deleteItemFromCartItems)="deleteFromCart($event)"></app-cart-item>
     </div>
     <div class="d-flex flex-row justify-content-between align-items-center mt-4">
       <p class="fw-bold mb-0">Total price: €{{ totalPrice }}</p>
