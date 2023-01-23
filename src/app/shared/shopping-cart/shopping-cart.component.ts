@@ -3,6 +3,7 @@ import {ShoppingCartService} from "../../services/shopping-cart.service";
 import {CartItem} from "../../models/cart-item.model";
 import {Message} from "../../models/message.model";
 import {MessageService} from "../../services/message.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-shopping-cart',
@@ -14,8 +15,12 @@ export class ShoppingCartComponent implements OnInit {
   cartItems: Array<CartItem> = [];
   totalPrice: number = 0;
   isLoading: boolean = false;
+  isLoadingButton: boolean = false;
 
-  constructor(private shoppingCartService: ShoppingCartService, private messageService: MessageService) {}
+  constructor(
+    private shoppingCartService: ShoppingCartService,
+    private messageService: MessageService,
+    private router: Router) {}
 
   ngOnInit() {
     this.isLoading = true;
@@ -51,6 +56,34 @@ export class ShoppingCartComponent implements OnInit {
       this.totalPrice += (cartItem.quantity * cartItem.product.price);
     }
     this.totalPrice = Number(this.totalPrice.toFixed(2));
+  }
+
+  checkOut() {
+    this.isLoadingButton = true;
+    this.shoppingCartService.clearShoppingCart().subscribe(
+      () => {
+        const message = new Message(
+          'Success',
+          'Thank you for your purchase!'
+        )
+        this.messageService.toggleToast(
+          message
+        );
+        this.isLoadingButton = false;
+        this.router.navigate(['/']);
+        this.closeCart();
+      },
+      () => {
+        const message = new Message(
+          'Error',
+          'Something went wrong!'
+        )
+        this.messageService.toggleToast(
+          message
+        );
+        this.isLoadingButton = false;
+      }
+    )
   }
 
   closeCart() {
