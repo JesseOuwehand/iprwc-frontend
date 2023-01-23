@@ -27,7 +27,7 @@ export class AuthenticationService {
 
   registerUser(newUser: User) {
     return this.http
-      .post<ResponseData>('https://bayoucountry.nl:8080/api/v1/auth/register', newUser)
+      .post<ResponseData>('https://bayoucountry.nl:8443/api/v1/auth/register', newUser)
       .pipe(
         tap(response => {
           this.authenticate(newUser.getEmail(), response.token)
@@ -37,7 +37,7 @@ export class AuthenticationService {
 
   Login(credentials: LoginCredentials) {
     return this.http
-      .post<ResponseData>('https://bayoucountry.nl:8080/api/v1/auth/login', credentials)
+      .post<ResponseData>('https://bayoucountry.nl:8443/api/v1/auth/login', credentials)
       .pipe(
         tap(response => {
           this.authenticate(credentials.getEmail(), response.token);
@@ -77,7 +77,7 @@ export class AuthenticationService {
 
   fetchUserInfo(token: string) {
     return this.http
-      .get<UserInfo>('https://bayoucountry.nl:8080/api/v1/user/info')
+      .get<UserInfo>('https://bayoucountry.nl:8443/api/v1/user/info')
       .pipe(
         tap(userInfo => {
           const currentUser = new CurrentUser(

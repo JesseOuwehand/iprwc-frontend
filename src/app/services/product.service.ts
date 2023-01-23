@@ -11,7 +11,7 @@ export class ProductService {
   addProduct(newProduct: ProductDto) {
     return this.http
       .post(
-        'https://bayoucountry.nl:8080/api/v1/product/add',
+        'https://bayoucountry.nl:8443/api/v1/product/add',
         newProduct
       );
   }
@@ -19,21 +19,21 @@ export class ProductService {
   fetchAllProducts() {
     return this.http
       .get<Product[]>(
-        'https://bayoucountry.nl:8080/api/v1/product'
+        'https://bayoucountry.nl:8443/api/v1/product'
       );
   }
 
   fetchProductById(id: number) {
     return this.http
       .get<Product>(
-        'https://bayoucountry.nl:8080/api/v1/product/' + id
+        'https://bayoucountry.nl:8443/api/v1/product/' + id
       );
   }
 
   updateProduct(productDto: ProductDto) {
     return this.http
       .post(
-        'https://bayoucountry.nl:8080/api/v1/product/update',
+        'https://bayoucountry.nl:8443/api/v1/product/update',
         productDto
       )
   }
@@ -41,7 +41,7 @@ export class ProductService {
   deleteProduct(productId: number) {
     return this.http
       .delete(
-        'https://bayoucountry.nl:8080/api/v1/product/' + productId
+        'https://bayoucountry.nl:8443/api/v1/product/' + productId
       );
   }
 }
