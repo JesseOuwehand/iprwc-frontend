@@ -32,4 +32,9 @@ export class ShoppingCartService {
         'http://localhost:8080/api/v1/cart/' + cartItem.id
       );
   }
+
+  clearShoppingCart() {
+    return this.http
+      .delete('http://localhost:8080/api/v1/cart/clear');
+  }
 }
